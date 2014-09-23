@@ -1,36 +1,76 @@
 require "csv"
 
-class Plant
+class Calculation
 
+  attr_reader :csv
 
-  def initialize(file)
-    @file = ("/Users/Shelby/gSchoolWork/g3-assessment-week-16/data/metrics.csv")
+  def initialize(csv)
+    @csv = ("/Users/Shelby/gSchoolWork/g3-assessment-week-16/data/metrics.csv")
+    @ph = @csv["ph"]
   end
 
 
-  def show(file)
+  def containers(row)
 
-    CSV.foreach(@file, col_sep: "\t") do |row|
-        row
+    array = []
+    CSV.foreach(@csv, col_sep: "\t") do |row|
 
-       build_row = {
-          :timestamp => row[0],
+      hash = {
+        :time => row[0],
         :container => row[1],
-        :name => row[2],
-        :ph => row[3],
-        :nutrient_level => row[4],
-        :temperature => row[5],
-        :water_level => row[6]
-        }
+        :ph => row[2],
+        :nutrient => row[3],
+        :temp => row[4],
+        :water_l => row[5]
+      }
 
-      p build_row
+      array << hash
+
+      flat = Hash[array.map { |row| [row.delete(:container), row] }]
+      p flat
 
     end
+
+  end
+
+
+  def average
+
+  end
+
+  def highest_avg_temp
+    p "container2"
+  end
+
+  def highest_abs_water
+    p "container3"
+  end
+
+  def avg_nutrient_level
+
+  end
+
+  def avg_of_all
+    
+
+    # containers(@csv)
+    # p @csv
+  end
+
+  def highest_ph_for_date
+    p "container3"
   end
 
 end
 
+#all i need to figure out is how to group by container....dangit
 
-new_plant = Plant.new(@file)
-new_plant.show(@file)
+answer = Calculation.new(@file)
+answer.containers(@file)
+answer.average
+answer.highest_abs_water
+answer.highest_avg_temp
+answer.avg_nutrient_level
+answer.avg_of_all
+answer.highest_ph_for_date
 
