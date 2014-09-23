@@ -15,6 +15,7 @@ GEM
     rspec-mocks (3.0.1)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.0)
+    tsv (0.0.2)
 
 PLATFORMS
   ruby
@@ -22,3 +23,4 @@ PLATFORMS
 DEPENDENCIES
   rake
   rspec (~> 3.0.0)
+  tsv (~> 0.0.2)
